@@ -34,7 +34,7 @@ int ListLength(Sqlist &l)
 {
 	return l.length;
 } 
-int GetElemtype(Sqlist &l,int i,Elemtype &e)
+int GetElem(Sqlist &l,int i,Elemtype &e)
 {
 	if(i<1||i>l.length) return 0;
 	e=l.elem[i-1];
@@ -45,18 +45,18 @@ int Compare(Elemtype t1,Elemtype t2)
 	if(t1==t2) return 1;
 	else return 0;
 }
-int LocateElemtype(Sqlist &l,Elemtype e)
+int LocateElem(Sqlist &l,Elemtype e)
 {
 	for(int i=0;i<l.length;i++)
 	{
-		if(Compare(e,l.elem[i])==1) return i;
+		if(Compare(e,l.elem[i])==1) return i+1;
 	}
 	return -1;
 }
-int NextElemtype(Sqlist &l,int current_elem,Elemtype &e)
+int NextElem(Sqlist &l,int i,Elemtype &e)
 {
-	if(current_elem<0||current_elem>l.length-1) return 0;
-	e=l.elem[current_elem+1];
+	if(i<0||i>l.length-1) return 0;
+	e=l.elem[i+1];
 	return 1;
 }
 void TailInsert(Sqlist &l,Elemtype e)
@@ -112,11 +112,11 @@ int main()
 	
 	Elemtype tmp1;
 	cout<<endl;
-	if(NextElemtype(l,1,tmp1)) cout<<tmp1<<endl;
+	if(NextElem(l,1,tmp1)) cout<<tmp1<<endl;
 	else cout<<"No NextElem!"<<endl;
 	
 	cout<<endl;
-	int location=LocateElemtype(l,tmp);
+	int location=LocateElem(l,tmp);
 	if(location==-1) cout<<"No this Elem."<<endl;
 	else cout<<location<<endl;
 	
